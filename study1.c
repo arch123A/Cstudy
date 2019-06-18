@@ -20,17 +20,20 @@ int zf(){
 
 
 int sz() {
+//    strlen和sizeof的区别
     char str[] = "123456";
     printf("str_size=%d\n", sizeof(str));
     printf("str_len=%d\n", strlen(str));
 }
 
 int db() {
+//    循环练习
     for (int i = 0, j = 10; i < j; ++i, --j) {
         printf("i=%d,j=%d\n", i, j);
     }
 }
 int cf() {
+//    打印九九乘法表
     for (int i = 1; i < 10; ++i) {
         for (int j = 1; j < i; ++j) {
             printf("%d*%d=%d\t", j, i, j * i);
