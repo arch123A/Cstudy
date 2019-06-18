@@ -1,0 +1,69 @@
+Python调试出现OSError: [WinError 193] %1 不是有效的 Win32 应用程序，一般来讲是因为python位数和dll位数不一样导致的，dll是32位的，而python是64位的。
+
+我的系统是64位Win7安装了64位的python，当调用32位dll（比如32位的ODBC驱动）的时候，就报错。
+
+如何解决：
+
+1、安装64位的dll（一般很难找到）
+
+2、安装32位的python
+
+用anaconda保证64位和32位的python共存
+
+我已经安装了64位的python，通过anaconda再安装一个32位的python即可解决调用32位dll的问题
+
+Anaconda的一些命令
+1.查看当前工作平台：conda info
+
+(base) C:\Users\Catlin Cao>conda info
+ 
+     active environment : base
+    active env location : F:\Anaconda3
+            shell level : 1
+       user config file : C:\Users\Catlin Cao\.condarc
+ populated config files : C:\Users\Catlin Cao\.condarc
+          conda version : 4.5.11
+    conda-build version : 3.15.1
+         python version : 3.7.0.final.0
+       base environment : F:\Anaconda3  (writable)
+           channel URLs : https://repo.anaconda.com/pkgs/main/win-32
+                          https://repo.anaconda.com/pkgs/main/noarch
+                          https://repo.anaconda.com/pkgs/free/win-32
+                          https://repo.anaconda.com/pkgs/free/noarch
+                          https://repo.anaconda.com/pkgs/r/win-32
+                          https://repo.anaconda.com/pkgs/r/noarch
+                          https://repo.anaconda.com/pkgs/pro/win-32
+                          https://repo.anaconda.com/pkgs/pro/noarch
+                          https://repo.anaconda.com/pkgs/msys2/win-32
+                          https://repo.anaconda.com/pkgs/msys2/noarch
+          package cache : F:\Anaconda3\pkgs32
+                          C:\Users\Catlin Cao\AppData\Local\conda\conda\pkgs32
+       envs directories : F:\Anaconda3\envs
+                          C:\Users\Catlin Cao\AppData\Local\conda\conda\envs
+                          C:\Users\Catlin Cao\.conda\envs
+               platform : win-32
+             user-agent : conda/4.5.11 requests/2.19.1 CPython/3.7.0 Windows/10 Windows/10.0.17134
+          administrator : False
+             netrc file : None
+           offline mode : False
+可见此时是32位平台。
+
+2.切换64位和32位：set CONDA_FORCE_32BIT=1是切换到32位；set CONDA_FORCE_32BIT= 是切换到64位。
+
+需要注意的是，这样切换环境对于已经安装的python没有任何影响，即原先是64位的python，现在还是64位，所以需要切换到32位后再安装python，并且安装需要在prompt下进行，在navigator里新建的python默认是64位的。
+
+3.安装python：conda create -n env_name python=3.6，如果需要安装一些包，只需要在name后加上对应的包名称。conda create -n env_name numpy matplotlib python=3.6。
+
+注意：安装32位python必须切换到32位的时候安装，安装64位python必须在64位上安装
+
+4.切换环境：conda activate env_name，conda deactivate env_name。
+
+5.移除环境：conda remove -n env_name --all
+
+6.安装包：activate env_name，conda install pandas。安装anaconda发行版的所有包：conda install anaconda，但是这样会在所有环境都执行这样的操作，所以需要指定安装环境：conda install -n env_name pandas或conda install -n env_name anaconda
+以上的操作都是在Anaconda Prompt里，其实用Anaconda图形界面（Navigator）安装python会更加直观，但是需要注意的是，无论你是否在Prompt里设置了32位的环境，用Navigator安装的python都是64位的，大家可以试一下，有异议欢迎留言交流。
+--------------------- 
+作者：vample 
+来源：CSDN 
+原文：https://blog.csdn.net/vample/article/details/88877745 
+版权声明：本文为博主原创文章，转载请附上博文链接！
