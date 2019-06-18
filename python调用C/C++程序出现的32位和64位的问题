@@ -1,0 +1,8 @@
+python调用C/C++程序出现的32位和64位的问题
+最近在学习使用python调用C++程序。具体步骤是先用gcc生成.so文件，然后在python中调用。
+具体大家可以参考博客：https://blog.csdn.net/taiyang1987912/article/details/44779719
+
+看起来是比较方便的，但是却遇上了32位和64位问题的坑。所以记
+
+原文：https://blog.csdn.net/budding0828/article/details/89344888 
+版权声明：本文为博主原创文章，转载请附上博文链接！
